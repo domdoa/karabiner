@@ -4,40 +4,6 @@ import { createHyperSubLayers, app, open, rectangle } from "./utils";
 
 const rules: KarabinerRules[] = [
   {
-    description: "Right command -> Hyper Key (⌃⌥⇧⌘)",
-    manipulators: [
-      {
-        type: "basic",
-        from: {
-          key_code: "right_command",
-          modifiers: {
-            optional: ["any"]
-          }
-        },
-        to: [
-          {
-            set_variable: {
-              name: "hyper",
-              value: 1
-            }
-          },
-          {
-            key_code: "left_control",
-            modifiers: ["left_option", "left_command", "left_shift"]
-          }
-        ],
-        to_after_key_up: [
-          {
-            set_variable: {
-              name: "hyper",
-              value: 0
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
     description: "Both Shifts -> Caps Lock",
     manipulators: [
       {
@@ -73,7 +39,7 @@ const rules: KarabinerRules[] = [
     ],
   },
   {
-    description: "Caps Lock -> Escape [tap], Control [hold]",
+    description: "Caps Lock -> Escape [tap], Hyper Key (⌃⌥⇧⌘) [hold]",
     manipulators: [
       {
         type: "basic",
@@ -85,70 +51,69 @@ const rules: KarabinerRules[] = [
         },
         to: [
           {
-            key_code: "left_control"
+            set_variable: {
+              name: "hyper",
+              value: 1
+            }
+          },
+          {
+            key_code: "left_control",
+            modifiers: ["left_option", "left_command", "left_shift"]
           }
         ],
         to_if_alone: [
           {
             key_code: "escape"
           }
+        ],
+        to_after_key_up: [
+          {
+            set_variable: {
+              name: "hyper",
+              value: 0
+            }
+          }
         ]
       }
     ]
   },
- 
+  {
+    description: "F4 -> Raycast Search Google",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "f4",
+          modifiers: {
+            optional: ["any"]
+          }
+        },
+        to: [
+          {
+            shell_command: "open raycast://extensions/mblode/google-search/index"
+          }
+        ]
+      }
+    ]
+  },
   
   ...createHyperSubLayers({
     // b = "B"rowse
     b: {
       f: open("https://facebook.com"),
     },
-    // o = "Open" applications
-    o: {
-      c: app("Notion Calendar"),
+    spacebar: {
+      c: app("Cursor"),
+      b: app("Arc"),
       s: app("Slack"),
-      n: app("Notion"),
+      n: app("Notes"),
       t: app("Ghostty"),
-      z: app("zoom.us"),
       f: app("Finder"),
-      i: app("Texts"),
       p: app("Spotify"),
     },
 
-    // TODO: This doesn't quite work yet.
-    // l = "Layouts" via Raycast's custom window management
-    // l: {
-    //   // Coding layout
-    //   c: shell`
-    //     open -a "Visual Studio Code.app"
-    //     sleep 0.2
-    //     open -g "raycast://customWindowManagementCommand?position=topLeft&relativeWidth=0.5"
-
-    //     open -a "Terminal.app"
-    //     sleep 0.2
-    //     open -g "raycast://customWindowManagementCommand?position=topRight&relativeWidth=0.5"
-    //   `,
-    // },
-
     // w = "Window" via rectangle.app
-    // TODO: Switch to spectral.app?
     w: {
-      semicolon: {
-        description: "Window: Hide",
-        to: [
-          {
-            key_code: "h",
-            modifiers: ["right_command"],
-          },
-        ],
-      },
-      y: rectangle("previous-display"),
-      o: rectangle("next-display"),
-      k: rectangle("top-half"),
-      j: rectangle("bottom-half"),
-      h: rectangle("left-half"),
-      l: rectangle("right-half"),
-      f: rectangle("maximize"),
       u: {
         description: "Window: Previous Tab",
         to: [
@@ -185,8 +150,7 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      // Note: No literal connection. Both f and n are already taken.
-      m: {
+      f: {
         description: "Window: Forward",
         to: [
           {
@@ -200,69 +164,12 @@ const rules: KarabinerRules[] = [
     // s = "System"
     s: {
       u: {
-        to: [
-          {
-            key_code: "volume_increment",
-          },
-        ],
+        to: [{ key_code: "volume_increment" }],
       },
       j: {
-        to: [
-          {
-            key_code: "volume_decrement",
-          },
-        ],
+        to: [{ key_code: "volume_decrement" }],
       },
-      i: {
-        to: [
-          {
-            key_code: "display_brightness_increment",
-          },
-        ],
-      },
-      k: {
-        to: [
-          {
-            key_code: "display_brightness_decrement",
-          },
-        ],
-      },
-      l: {
-        to: [
-          {
-            key_code: "q",
-            modifiers: ["right_control", "right_command"],
-          },
-        ],
-      },
-      p: {
-        to: [
-          {
-            key_code: "play_or_pause",
-          },
-        ],
-      },
-      semicolon: {
-        to: [
-          {
-            key_code: "fastforward",
-          },
-        ],
-      },
-      // "D"o not disturb toggle
-      d: open(
-        `raycast://extensions/yakitrak/do-not-disturb/toggle?launchType=background`
-      ),
       c: open("raycast://extensions/raycast/system/open-camera"),
-      // 'v'oice
-      v: {
-        to: [
-          {
-            key_code: "spacebar",
-            modifiers: ["left_option"],
-          },
-        ],
-      },
     },
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand
@@ -280,18 +187,6 @@ const rules: KarabinerRules[] = [
       l: {
         to: [{ key_code: "right_arrow" }],
       },
-      // Magicmove via homerow.app
-      m: {
-        to: [{ key_code: "f", modifiers: ["right_control"] }],
-        // TODO: Trigger Vim Easymotion when VSCode is focused
-      },
-      // Scroll mode via homerow.app
-      s: {
-        to: [{ key_code: "j", modifiers: ["right_control"] }],
-      },
-      d: {
-        to: [{ key_code: "d", modifiers: ["right_shift", "right_command"] }],
-      },
       u: {
         to: [{ key_code: "page_down" }],
       },
@@ -300,28 +195,13 @@ const rules: KarabinerRules[] = [
       },
     },
 
-    // c = Musi*c* which isn't "m" because we want it to be on the left hand
-    c: {
-      p: {
-        to: [{ key_code: "play_or_pause" }],
-      },
-      n: {
-        to: [{ key_code: "fastforward" }],
-      },
-      b: {
-        to: [{ key_code: "rewind" }],
-      },
-    },
-
     // r = "Raycast"
     r: {
-      c: open("raycast://extensions/thomas/color-picker/pick-color"),
-      n: open("raycast://script-commands/dismiss-notifications"),
       e: open(
         "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
       ),
       p: open("raycast://extensions/raycast/raycast/confetti"),
-      a: open("raycast://extensions/raycast/raycast-ai/ai-chat"),
+      s: open("raycast://extensions/raycast/calendar/my-schedule")
     },
   }),
 ];
