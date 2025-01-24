@@ -12,6 +12,10 @@ export interface Manipulator {
   to_if_alone?: To[];
   parameters?: Parameters;
   conditions?: Conditions[];
+  to_delayed_action?: {
+    to_if_invoked?: To[];
+    to_if_canceled?: To[];
+  };
 }
 
 export interface Parameters {

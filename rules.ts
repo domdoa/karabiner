@@ -1,6 +1,6 @@
 import fs from "fs";
 import { KarabinerRules } from "./types";
-import { createHyperSubLayers, app, open, rectangle } from "./utils";
+import { createHyperSubLayers, app, open } from "./utils";
 
 const rules: KarabinerRules[] = [
   {
@@ -96,12 +96,8 @@ const rules: KarabinerRules[] = [
       }
     ]
   },
-  
+
   ...createHyperSubLayers({
-    // b = "B"rowse
-    b: {
-      f: open("https://facebook.com"),
-    },
     spacebar: {
       c: app("Cursor"),
       b: app("Arc"),
@@ -110,6 +106,18 @@ const rules: KarabinerRules[] = [
       t: app("Ghostty"),
       f: app("Finder"),
       p: app("Spotify"),
+      m: app("Mail"),
+      g: app("ChatGPT"),
+    },
+
+    // r = "Raycast"
+    r: {
+      e: open(
+        "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
+      ),
+      p: open("raycast://extensions/raycast/raycast/confetti"),
+      s: open("raycast://extensions/raycast/calendar/my-schedule"),
+      c: open("raycast://extensions/raycast/system/open-camera"),
     },
 
     // w = "Window" via rectangle.app
@@ -169,12 +177,20 @@ const rules: KarabinerRules[] = [
       j: {
         to: [{ key_code: "volume_decrement" }],
       },
-      c: open("raycast://extensions/raycast/system/open-camera"),
     },
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand
     // so that hjkl work like they do in vim
     v: {
+      u: {
+        to: [{ key_code: "page_down" }],
+      },
+      i: {
+        to: [{ key_code: "page_up" }],
+      },
+    },
+
+    a: {
       h: {
         to: [{ key_code: "left_arrow" }],
       },
@@ -187,21 +203,12 @@ const rules: KarabinerRules[] = [
       l: {
         to: [{ key_code: "right_arrow" }],
       },
-      u: {
-        to: [{ key_code: "page_down" }],
-      },
-      i: {
-        to: [{ key_code: "page_up" }],
-      },
     },
 
-    // r = "Raycast"
-    r: {
-      e: open(
-        "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
-      ),
-      p: open("raycast://extensions/raycast/raycast/confetti"),
-      s: open("raycast://extensions/raycast/calendar/my-schedule")
+    b: {
+      f: open("https://facebook.com"),
+      g: open("https://github.com"),
+      v: open("https://vinted.lt"),
     },
   }),
 ];
