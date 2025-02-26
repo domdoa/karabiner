@@ -78,6 +78,84 @@ const rules: KarabinerRules[] = [
     ]
   },
   {
+    description: "Hyper + K -> Up Arrow",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "k",
+          modifiers: {
+            mandatory: ["left_control", "left_option", "left_command", "left_shift"]
+          }
+        },
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 1
+          }
+        ],
+        to: [
+          {
+            key_code: "up_arrow"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    description: "Hyper + J -> Down Arrow",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "j",
+          modifiers: {
+            mandatory: ["left_control", "left_option", "left_command", "left_shift"]
+          }
+        },
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 1
+          }
+        ],
+        to: [
+          {
+            key_code: "down_arrow"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    description: "Hyper + L -> Right Arrow",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "l",
+          modifiers: {
+            mandatory: ["left_control", "left_option", "left_command", "left_shift"]
+          }
+        },
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 1
+          }
+        ],
+        to: [
+          {
+            key_code: "right_arrow"
+          }
+        ]
+      }
+    ]
+  },
+  {
     description: "F4 -> Raycast Search Google",
     manipulators: [
       {
@@ -108,6 +186,7 @@ const rules: KarabinerRules[] = [
       p: app("Spotify"),
       m: app("Mail"),
       g: app("ChatGPT"),
+      d: app("TablePlus"),
     },
 
     // r = "Raycast"
