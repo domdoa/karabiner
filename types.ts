@@ -20,6 +20,7 @@ export interface Manipulator {
 
 export interface Parameters {
   "basic.simultaneous_threshold_milliseconds"?: number;
+  "to_if_alone_timeout_milliseconds"?: number;
 }
 
 type Conditions =
@@ -116,7 +117,8 @@ type ModifiersKeys =
   | "left_gui"
   | "right_alt"
   | "right_gui"
-  | "any";
+  | "any"
+  | "g";
 
 export interface From {
   key_code?: KeyCode;

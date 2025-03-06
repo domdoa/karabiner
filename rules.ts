@@ -174,6 +174,242 @@ const rules: KarabinerRules[] = [
       }
     ]
   },
+  
+  // F → shift
+  // D → command
+  // S → option
+  // A → control
+
+  // I → shift
+  // ; → command
+  {
+    description: "Home row mod: F -> Left Shift",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "f",
+          modifiers: {
+            optional: ["any"]
+          }
+        },
+        to: [
+          {
+            key_code: "left_shift"
+          }
+        ],
+        to_if_alone: [
+          {
+            key_code: "f"
+          }
+        ],
+        parameters: {
+          "to_if_alone_timeout_milliseconds": 150
+        }
+      }
+    ]
+  },
+  {
+    description: "Home row mod: D -> Left Command",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "d",
+          modifiers: {
+            optional: ["any"]
+          }
+        },
+        to: [
+          {
+            key_code: "left_command"
+          }
+        ],
+        to_if_alone: [
+          {
+            key_code: "d"
+          }
+        ],
+        parameters: {
+          "to_if_alone_timeout_milliseconds": 150
+        }
+      }
+    ]
+  },
+  {
+    description: "Home row mod: S -> Left option",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "s",
+          modifiers: {
+            optional: ["any"]
+          }
+        },
+        to: [
+          {
+            key_code: "left_option"
+          }
+        ],
+        to_if_alone: [
+          {
+            key_code: "s"
+          }
+        ],
+        parameters: {
+          "to_if_alone_timeout_milliseconds": 500 
+        }
+      }
+    ]
+  },
+  {
+    description: "Home row mod: A -> Left control",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "a",
+          modifiers: {
+            optional: ["any"]
+          }
+        },
+        to: [
+          {
+            key_code: "left_control"
+          }
+        ],
+        to_if_alone: [
+          {
+            key_code: "a"
+          }
+        ],
+        parameters: {
+          "to_if_alone_timeout_milliseconds": 500
+        }
+      }
+    ]
+  },
+  {
+    description: "Home row mod: I -> Left Shift",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "i",
+          modifiers: {
+            optional: ["any"]
+          }
+        },
+        to: [
+          {
+            key_code: "left_shift"
+          }
+        ],
+        to_if_alone: [
+          {
+            key_code: "i"
+          }
+        ],
+        parameters: {
+          "to_if_alone_timeout_milliseconds": 150
+        }
+      }
+    ]
+  },
+  {
+    description: "Home row mod: ; -> Left Command",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "semicolon",
+          modifiers: {
+            optional: ["any"]
+          }
+        },
+        to: [
+          {
+            key_code: "left_command"
+          }
+        ],
+        to_if_alone: [
+          {
+            key_code: "semicolon"
+          }
+        ],
+        parameters: {
+          "to_if_alone_timeout_milliseconds": 150
+        }
+      }
+    ]
+  },
+  {
+    description: "Home row mod: G -> Left option",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "g",
+          modifiers: {
+            optional: ["any"]
+          }
+        },
+        to: [
+          {
+            key_code: "left_option"
+          }
+        ],
+        to_if_alone: [
+          {
+            key_code: "g"
+          }
+        ],
+        parameters: {
+          "to_if_alone_timeout_milliseconds": 150
+        }
+      }
+    ]
+  },
+  {
+    description: "G+H -> Enter",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "h",
+          modifiers: {
+            mandatory: ["left_option"]
+          }
+        },
+        to: [
+          {
+            key_code: "return_or_enter"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    description: "G+N -> Backspace",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "n",
+          modifiers: {
+            mandatory: ["left_option"]
+          }
+        },
+        to: [
+          {
+            key_code: "delete_or_backspace"
+          }
+        ]
+      }
+    ]
+  },
+  
 
   ...createHyperSubLayers({
     spacebar: {
