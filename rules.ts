@@ -177,11 +177,12 @@ const rules: KarabinerRules[] = [
   
   // F → shift
   // D → command
-  // S → option
-  // A → control
 
   // I → shift
   // ; → command
+
+  // GH → enter
+  // GN → backspace
   {
     description: "Home row mod: F -> Left Shift",
     manipulators: [
@@ -232,60 +233,6 @@ const rules: KarabinerRules[] = [
         ],
         parameters: {
           "to_if_alone_timeout_milliseconds": 150
-        }
-      }
-    ]
-  },
-  {
-    description: "Home row mod: S -> Left option",
-    manipulators: [
-      {
-        type: "basic",
-        from: {
-          key_code: "s",
-          modifiers: {
-            optional: ["any"]
-          }
-        },
-        to: [
-          {
-            key_code: "left_option"
-          }
-        ],
-        to_if_alone: [
-          {
-            key_code: "s"
-          }
-        ],
-        parameters: {
-          "to_if_alone_timeout_milliseconds": 500 
-        }
-      }
-    ]
-  },
-  {
-    description: "Home row mod: A -> Left control",
-    manipulators: [
-      {
-        type: "basic",
-        from: {
-          key_code: "a",
-          modifiers: {
-            optional: ["any"]
-          }
-        },
-        to: [
-          {
-            key_code: "left_control"
-          }
-        ],
-        to_if_alone: [
-          {
-            key_code: "a"
-          }
-        ],
-        parameters: {
-          "to_if_alone_timeout_milliseconds": 500
         }
       }
     ]
