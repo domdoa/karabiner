@@ -1,6 +1,6 @@
 import fs from "fs";
 import { KarabinerRules } from "./types";
-import { createHyperSubLayers, app, open } from "./utils";
+import { createHyperSubLayers, open } from "./utils";
 
 const rules: KarabinerRules[] = [
   {
@@ -72,6 +72,57 @@ const rules: KarabinerRules[] = [
               name: "hyper",
               value: 0
             }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    description: "Hyper + M -> Maximize Window",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "f",
+          modifiers: {
+            mandatory: ["left_control", "left_option", "left_command", "left_shift"]
+          }
+        },
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 1
+          }
+        ],
+        to: [
+          {
+            shell_command: "open -g raycast://extensions/raycast/window-management/maximize"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    description: "Spacebar -> Hyper Key (⌃⌥⇧⌘) [hold]",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "spacebar",
+          modifiers: {
+            optional: ["any"]
+          }
+        },
+        to: [
+          {
+            key_code: "left_control",
+            modifiers: ["left_option", "left_command", "left_shift"]
+          }
+        ],
+        to_if_alone: [
+          {
+            key_code: "spacebar"
           }
         ]
       }
@@ -205,7 +256,7 @@ const rules: KarabinerRules[] = [
           }
         ],
         parameters: {
-          "to_if_alone_timeout_milliseconds": 150
+          "to_if_alone_timeout_milliseconds": 250
         }
       }
     ]
@@ -232,7 +283,7 @@ const rules: KarabinerRules[] = [
           }
         ],
         parameters: {
-          "to_if_alone_timeout_milliseconds": 150
+          "to_if_alone_timeout_milliseconds":  250
         }
       }
     ]
@@ -359,18 +410,18 @@ const rules: KarabinerRules[] = [
   
 
   ...createHyperSubLayers({
-    spacebar: {
-      c: app("Cursor"),
-      b: app("Arc"),
-      s: app("Slack"),
-      n: app("Notes"),
-      t: app("Ghostty"),
-      f: app("Finder"),
-      p: app("Spotify"),
-      m: app("Mail"),
-      g: app("ChatGPT"),
-      d: app("TablePlus"),
-    },
+    // spacebar: {
+    //   c: app("Cursor"),
+    //   b: app("Arc"),
+    //   s: app("Slack"),
+    //   n: app("Notes"),
+    //   t: app("Ghostty"),
+    //   f: app("Finder"),
+    //   p: app("Spotify"),
+    //   m: app("Mail"),
+    //   g: app("ChatGPT"),
+    //   d: app("TablePlus"),
+    // },
 
     // r = "Raycast"
     r: {
