@@ -192,13 +192,13 @@ export function shell(
 }
 
 /**
- * Shortcut for managing window sizing with Rectangle
+ * Shortcut for managing window sizing
  */
-export function rectangle(name: string): LayerCommand {
+export function window(name: string): LayerCommand {
   return {
     to: [
       {
-        shell_command: `open -g rectangle://execute-action?name=${name}`,
+        shell_command: `open -g raycast://extensions/raycast/window-management/${name}`,
       },
     ],
     description: `Window: ${name}`,

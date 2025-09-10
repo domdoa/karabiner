@@ -451,7 +451,6 @@ const rules: KarabinerRules[] = [
     //   d: app("TablePlus"),
     // },
 
-
     // r = "Raycast"
     r: {
       e: open(
