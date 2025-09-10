@@ -283,7 +283,7 @@ const rules: KarabinerRules[] = [
           }
         ],
         parameters: {
-          "to_if_alone_timeout_milliseconds":  250
+          "to_if_alone_timeout_milliseconds":  300
         }
       }
     ]
@@ -310,7 +310,7 @@ const rules: KarabinerRules[] = [
           }
         ],
         parameters: {
-          "to_if_alone_timeout_milliseconds": 150
+          "to_if_alone_timeout_milliseconds": 200
         }
       }
     ]
@@ -337,7 +337,7 @@ const rules: KarabinerRules[] = [
           }
         ],
         parameters: {
-          "to_if_alone_timeout_milliseconds": 150
+          "to_if_alone_timeout_milliseconds": 200
         }
       }
     ]
@@ -364,7 +364,7 @@ const rules: KarabinerRules[] = [
           }
         ],
         parameters: {
-          "to_if_alone_timeout_milliseconds": 150
+          "to_if_alone_timeout_milliseconds": 200
         }
       }
     ]
@@ -389,12 +389,12 @@ const rules: KarabinerRules[] = [
     ]
   },
   {
-    description: "G+N -> Backspace",
+    description: "G+U -> Backspace",
     manipulators: [
       {
         type: "basic",
         from: {
-          key_code: "n",
+          key_code: "u",
           modifiers: {
             mandatory: ["left_option"]
           }
@@ -407,10 +407,39 @@ const rules: KarabinerRules[] = [
       }
     ]
   },
+
+
+  {
+    description: "Hyper (⌃⌥⇧⌘) + M -> Mail",
+    manipulators: [
+      {
+        type: "basic",
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 1
+          }
+        ],
+        from: {
+          key_code: "m",
+          modifiers: {
+            mandatory: ["left_control", "left_shift", "left_option", "left_command"]
+          }
+        },
+        to: [
+          {
+            shell_command: "open -a 'Mail.app'"
+          }
+        ]
+      }
+    ]
+  },
   
 
   ...createHyperSubLayers({
     // spacebar: {
+      // m: app("Mail"),
     //   c: app("Cursor"),
     //   b: app("Arc"),
     //   s: app("Slack"),
@@ -418,10 +447,10 @@ const rules: KarabinerRules[] = [
     //   t: app("Ghostty"),
     //   f: app("Finder"),
     //   p: app("Spotify"),
-    //   m: app("Mail"),
     //   g: app("ChatGPT"),
     //   d: app("TablePlus"),
     // },
+
 
     // r = "Raycast"
     r: {
@@ -520,8 +549,8 @@ const rules: KarabinerRules[] = [
     },
 
     b: {
-      f: open("https://facebook.com"),
       g: open("https://github.com"),
+      f: open("https://facebook.com"),
       v: open("https://vinted.lt"),
     },
   }),
