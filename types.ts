@@ -12,10 +12,15 @@ export interface Manipulator {
   to_if_alone?: To[];
   parameters?: Parameters;
   conditions?: Conditions[];
+  to_delayed_action?: {
+    to_if_invoked?: To[];
+    to_if_canceled?: To[];
+  };
 }
 
 export interface Parameters {
   "basic.simultaneous_threshold_milliseconds"?: number;
+  "to_if_alone_timeout_milliseconds"?: number;
 }
 
 type Conditions =
@@ -112,7 +117,8 @@ type ModifiersKeys =
   | "left_gui"
   | "right_alt"
   | "right_gui"
-  | "any";
+  | "any"
+  | "g";
 
 export interface From {
   key_code?: KeyCode;
