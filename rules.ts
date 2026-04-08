@@ -4,6 +4,31 @@ import { createHyperSubLayers, open } from "./utils";
 
 const rules: KarabinerRules[] = [
   {
+    description: "Spacebar -> Hyper Key (⌃⌥⇧⌘) [hold]",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "spacebar",
+          modifiers: {
+            optional: ["any"],
+          },
+        },
+        to: [
+          {
+            key_code: "left_control",
+            modifiers: ["left_option", "left_command", "left_shift"],
+          },
+        ],
+        to_if_alone: [
+          {
+            key_code: "spacebar",
+          },
+        ],
+      },
+    ],
+  },
+  {
     description: "Both Shifts -> Caps Lock",
     manipulators: [
       {
@@ -12,7 +37,7 @@ const rules: KarabinerRules[] = [
           key_code: "left_shift",
           modifiers: {
             mandatory: ["right_shift"],
-            optional: ["caps_lock"]
+            optional: ["caps_lock"],
           },
         },
         to: [
@@ -27,7 +52,7 @@ const rules: KarabinerRules[] = [
           key_code: "right_shift",
           modifiers: {
             mandatory: ["left_shift"],
-            optional: ["caps_lock"]
+            optional: ["caps_lock"],
           },
         },
         to: [
@@ -46,87 +71,68 @@ const rules: KarabinerRules[] = [
         from: {
           key_code: "caps_lock",
           modifiers: {
-            optional: ["any"]
-          }
+            optional: ["any"],
+          },
         },
         to: [
           {
             set_variable: {
               name: "hyper",
-              value: 1
-            }
+              value: 1,
+            },
           },
           {
             key_code: "left_control",
-            modifiers: ["left_option", "left_command", "left_shift"]
-          }
+            modifiers: ["left_option", "left_command", "left_shift"],
+          },
         ],
         to_if_alone: [
           {
-            key_code: "escape"
-          }
+            key_code: "escape",
+          },
         ],
         to_after_key_up: [
           {
             set_variable: {
               name: "hyper",
-              value: 0
-            }
-          }
-        ]
-      }
-    ]
+              value: 0,
+            },
+          },
+        ],
+      },
+    ],
   },
   {
-    description: "Hyper + M -> Maximize Window",
+    description: "Hyper + F -> Maximize Window",
     manipulators: [
       {
         type: "basic",
         from: {
           key_code: "f",
           modifiers: {
-            mandatory: ["left_control", "left_option", "left_command", "left_shift"]
-          }
+            mandatory: [
+              "left_control",
+              "left_option",
+              "left_command",
+              "left_shift",
+            ],
+          },
         },
         conditions: [
           {
             type: "variable_if",
             name: "hyper",
-            value: 1
-          }
+            value: 1,
+          },
         ],
         to: [
           {
-            shell_command: "open -g raycast://extensions/raycast/window-management/maximize"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    description: "Spacebar -> Hyper Key (⌃⌥⇧⌘) [hold]",
-    manipulators: [
-      {
-        type: "basic",
-        from: {
-          key_code: "spacebar",
-          modifiers: {
-            optional: ["any"]
-          }
-        },
-        to: [
-          {
-            key_code: "left_control",
-            modifiers: ["left_option", "left_command", "left_shift"]
-          }
+            shell_command:
+              "open -g raycast://extensions/raycast/window-management/maximize",
+          },
         ],
-        to_if_alone: [
-          {
-            key_code: "spacebar"
-          }
-        ]
-      }
-    ]
+      },
+    ],
   },
   {
     description: "Hyper + K -> Up Arrow",
@@ -136,23 +142,28 @@ const rules: KarabinerRules[] = [
         from: {
           key_code: "k",
           modifiers: {
-            mandatory: ["left_control", "left_option", "left_command", "left_shift"]
-          }
+            mandatory: [
+              "left_control",
+              "left_option",
+              "left_command",
+              "left_shift",
+            ],
+          },
         },
         conditions: [
           {
             type: "variable_if",
             name: "hyper",
-            value: 1
-          }
+            value: 1,
+          },
         ],
         to: [
           {
-            key_code: "up_arrow"
-          }
-        ]
-      }
-    ]
+            key_code: "up_arrow",
+          },
+        ],
+      },
+    ],
   },
   {
     description: "Hyper + J -> Down Arrow",
@@ -162,23 +173,28 @@ const rules: KarabinerRules[] = [
         from: {
           key_code: "j",
           modifiers: {
-            mandatory: ["left_control", "left_option", "left_command", "left_shift"]
-          }
+            mandatory: [
+              "left_control",
+              "left_option",
+              "left_command",
+              "left_shift",
+            ],
+          },
         },
         conditions: [
           {
             type: "variable_if",
             name: "hyper",
-            value: 1
-          }
+            value: 1,
+          },
         ],
         to: [
           {
-            key_code: "down_arrow"
-          }
-        ]
-      }
-    ]
+            key_code: "down_arrow",
+          },
+        ],
+      },
+    ],
   },
   {
     description: "Hyper + L -> Right Arrow",
@@ -188,46 +204,32 @@ const rules: KarabinerRules[] = [
         from: {
           key_code: "l",
           modifiers: {
-            mandatory: ["left_control", "left_option", "left_command", "left_shift"]
-          }
+            mandatory: [
+              "left_control",
+              "left_option",
+              "left_command",
+              "left_shift",
+            ],
+          },
         },
         conditions: [
           {
             type: "variable_if",
             name: "hyper",
-            value: 1
-          }
+            value: 1,
+          },
         ],
         to: [
           {
-            key_code: "right_arrow"
-          }
-        ]
-      }
-    ]
+            key_code: "right_arrow",
+          },
+        ],
+      },
+    ],
   },
-  {
-    description: "F4 -> Raycast Search Google",
-    manipulators: [
-      {
-        type: "basic",
-        from: {
-          key_code: "f4",
-          modifiers: {
-            optional: ["any"]
-          }
-        },
-        to: [
-          {
-            shell_command: "open raycast://extensions/mblode/google-search/index"
-          }
-        ]
-      }
-    ]
-  },
-  
   // F → shift
   // D → command
+  // G → option
 
   // I → shift
   // ; → command
@@ -242,24 +244,24 @@ const rules: KarabinerRules[] = [
         from: {
           key_code: "f",
           modifiers: {
-            optional: ["any"]
-          }
+            optional: ["any"],
+          },
         },
         to: [
           {
-            key_code: "left_shift"
-          }
+            key_code: "left_shift",
+          },
         ],
         to_if_alone: [
           {
-            key_code: "f"
-          }
+            key_code: "f",
+          },
         ],
         parameters: {
-          "to_if_alone_timeout_milliseconds": 250
-        }
-      }
-    ]
+          to_if_alone_timeout_milliseconds: 400,
+        },
+      },
+    ],
   },
   {
     description: "Home row mod: D -> Left Command",
@@ -269,105 +271,126 @@ const rules: KarabinerRules[] = [
         from: {
           key_code: "d",
           modifiers: {
-            optional: ["any"]
-          }
+            optional: ["any"],
+          },
         },
         to: [
           {
-            key_code: "left_command"
-          }
+            key_code: "left_command",
+          },
         ],
         to_if_alone: [
           {
-            key_code: "d"
-          }
+            key_code: "d",
+          },
         ],
         parameters: {
-          "to_if_alone_timeout_milliseconds":  300
-        }
-      }
-    ]
+          to_if_alone_timeout_milliseconds: 800,
+        },
+      },
+    ],
   },
   {
     description: "Home row mod: I -> Left Shift",
     manipulators: [
       {
         type: "basic",
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 0,
+          },
+        ],
         from: {
           key_code: "i",
           modifiers: {
-            optional: ["any"]
-          }
+            optional: ["any"],
+          },
         },
         to: [
           {
-            key_code: "left_shift"
-          }
+            key_code: "left_shift",
+          },
         ],
         to_if_alone: [
           {
-            key_code: "i"
-          }
+            key_code: "i",
+          },
         ],
         parameters: {
-          "to_if_alone_timeout_milliseconds": 200
-        }
-      }
-    ]
+          to_if_alone_timeout_milliseconds: 400,
+        },
+      },
+    ],
   },
   {
     description: "Home row mod: ; -> Left Command",
     manipulators: [
       {
         type: "basic",
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 0,
+          },
+        ],
         from: {
           key_code: "semicolon",
           modifiers: {
-            optional: ["any"]
-          }
+            optional: ["any"],
+          },
         },
         to: [
           {
-            key_code: "left_command"
-          }
+            key_code: "left_command",
+          },
         ],
         to_if_alone: [
           {
-            key_code: "semicolon"
-          }
+            key_code: "semicolon",
+          },
         ],
         parameters: {
-          "to_if_alone_timeout_milliseconds": 200
-        }
-      }
-    ]
+          to_if_alone_timeout_milliseconds: 400,
+        },
+      },
+    ],
   },
   {
     description: "Home row mod: G -> Left option",
     manipulators: [
       {
         type: "basic",
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 0,
+          },
+        ],
         from: {
           key_code: "g",
           modifiers: {
-            optional: ["any"]
-          }
+            optional: ["any"],
+          },
         },
         to: [
           {
-            key_code: "left_option"
-          }
+            key_code: "left_option",
+          },
         ],
         to_if_alone: [
           {
-            key_code: "g"
-          }
+            key_code: "g",
+          },
         ],
         parameters: {
-          "to_if_alone_timeout_milliseconds": 200
-        }
-      }
-    ]
+          to_if_alone_timeout_milliseconds: 400,
+        },
+      },
+    ],
   },
   {
     description: "G+H -> Enter",
@@ -377,16 +400,16 @@ const rules: KarabinerRules[] = [
         from: {
           key_code: "h",
           modifiers: {
-            mandatory: ["left_option"]
-          }
+            mandatory: ["left_option"],
+          },
         },
         to: [
           {
-            key_code: "return_or_enter"
-          }
-        ]
-      }
-    ]
+            key_code: "return_or_enter",
+          },
+        ],
+      },
+    ],
   },
   {
     description: "G+U -> Backspace",
@@ -396,18 +419,21 @@ const rules: KarabinerRules[] = [
         from: {
           key_code: "u",
           modifiers: {
-            mandatory: ["left_option"]
-          }
+            mandatory: ["left_option"],
+          },
         },
         to: [
           {
-            key_code: "delete_or_backspace"
-          }
-        ]
-      }
-    ]
+            key_code: "delete_or_backspace",
+          },
+        ],
+      },
+    ],
   },
 
+  // Additional shorctus, not covered by Raycast (Hyper is Caps lock hold for karabiner)
+  // Hyper + M -> Mail
+  // Hyper + S -> Schedule (raycast extension)
 
   {
     description: "Hyper (⌃⌥⇧⌘) + M -> Mail",
@@ -418,28 +444,85 @@ const rules: KarabinerRules[] = [
           {
             type: "variable_if",
             name: "hyper",
-            value: 1
-          }
+            value: 1,
+          },
         ],
         from: {
           key_code: "m",
           modifiers: {
-            mandatory: ["left_control", "left_shift", "left_option", "left_command"]
-          }
+            mandatory: [
+              "left_control",
+              "left_shift",
+              "left_option",
+              "left_command",
+            ],
+          },
         },
         to: [
           {
-            shell_command: "open -a 'Mail.app'"
-          }
-        ]
-      }
-    ]
+            shell_command: "open -a 'Mail.app'",
+          },
+        ],
+      },
+    ],
   },
-  
+  {
+    description: "Hyper (⌃⌥⇧⌘) + S -> Schedule",
+    manipulators: [
+      {
+        type: "basic",
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 1,
+          },
+        ],
+        from: {
+          key_code: "s",
+          modifiers: {
+            mandatory: [
+              "left_control",
+              "left_shift",
+              "left_option",
+              "left_command",
+            ],
+          },
+        },
+        to: [
+          {
+            shell_command:
+              "open raycast://extensions/raycast/calendar/my-schedule",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    description: "F4 -> Raycast Search Google",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "f4",
+          modifiers: {
+            optional: ["any"],
+          },
+        },
+        to: [
+          {
+            shell_command:
+              "open raycast://extensions/mblode/google-search/index",
+          },
+        ],
+      },
+    ],
+  },
 
   ...createHyperSubLayers({
     // spacebar: {
-      // m: app("Mail"),
+    // m: app("Mail"),
     //   c: app("Cursor"),
     //   b: app("Arc"),
     //   s: app("Slack"),
@@ -454,71 +537,12 @@ const rules: KarabinerRules[] = [
     // r = "Raycast"
     r: {
       e: open(
-        "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
+        "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols",
       ),
       p: open("raycast://extensions/raycast/raycast/confetti"),
       n: open("raycast://extensions/raycast/raycast-notes/raycast-notes"),
       s: open("raycast://extensions/raycast/calendar/my-schedule"),
       c: open("raycast://extensions/raycast/system/open-camera"),
-    },
-
-    // w = "Window" via rectangle.app
-    w: {
-      u: {
-        description: "Window: Previous Tab",
-        to: [
-          {
-            key_code: "tab",
-            modifiers: ["right_control", "right_shift"],
-          },
-        ],
-      },
-      i: {
-        description: "Window: Next Tab",
-        to: [
-          {
-            key_code: "tab",
-            modifiers: ["right_control"],
-          },
-        ],
-      },
-      n: {
-        description: "Window: Next Window",
-        to: [
-          {
-            key_code: "grave_accent_and_tilde",
-            modifiers: ["right_command"],
-          },
-        ],
-      },
-      b: {
-        description: "Window: Back",
-        to: [
-          {
-            key_code: "open_bracket",
-            modifiers: ["right_command"],
-          },
-        ],
-      },
-      f: {
-        description: "Window: Forward",
-        to: [
-          {
-            key_code: "close_bracket",
-            modifiers: ["right_command"],
-          },
-        ],
-      },
-    },
-
-    // s = "System"
-    s: {
-      u: {
-        to: [{ key_code: "volume_increment" }],
-      },
-      j: {
-        to: [{ key_code: "volume_decrement" }],
-      },
     },
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand
@@ -547,11 +571,22 @@ const rules: KarabinerRules[] = [
       },
     },
 
-    b: {
-      g: open("https://github.com"),
-      f: open("https://facebook.com"),
-      v: open("https://vinted.lt"),
-    },
+    // s = "System"
+    // s: {
+    //   // u: {
+    //   //   to: [{ key_code: "volume_increment" }],
+    //   // },
+    //   // j: {
+    //   //   to: [{ key_code: "volume_decrement" }],
+    //   // },
+    // },
+
+    // b = "Browser"
+    // b: {
+    //   g: open("https://github.com"),
+    //   f: open("https://facebook.com"),
+    //   v: open("https://vinted.lt"),
+    // },
   }),
 ];
 
@@ -572,6 +607,6 @@ fs.writeFileSync(
       ],
     },
     null,
-    2
-  )
+    2,
+  ),
 );
